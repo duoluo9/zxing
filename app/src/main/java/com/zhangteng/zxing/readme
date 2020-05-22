@@ -1,0 +1,59 @@
+ViewfinderView属性说明
+属性	值类型	默认值	说明
+maskColor	color	#60000000	扫描区外遮罩的颜色
+frameColor	color	#7F1FB3E2	扫描区边框的颜色
+cornerColor	color	#FF1FB3E2	扫描区边角的颜色
+laserColor	color	#FF1FB3E2	扫描区激光线的颜色
+resultPointColor	color	#C0EFBD21	扫描区结果点的颜色
+labelText	string		扫描提示文本信息
+labelTextColor	color	#FFC0C0C0	提示文本字体颜色
+labelTextSize	dimension	14sp	提示文本字体大小
+labelTextPadding	dimension	24dp	提示文本距离扫描区的间距
+labelTextLocation	enum	bottom	提示文本显示位置
+showResultPoint	boolean	false	是否显示合适的扫码结果点
+frameWidth	dimension		扫码框宽度
+frameHeight	dimension		扫码框高度
+laserStyle	enum	line	扫描激光的样式
+gridColumn	integer	20	网格扫描激光列数
+gridHeight	integer	40dp	网格扫描激光高度，为0dp时，表示动态铺满
+
+
+示例
+布局示例 （可自定义布局，布局内至少要保证有SurfaceView和ViewfinderView，控件id可根据重写CaptureActivity 的 getPreviewViewId 和 getViewFinderViewId方法自定义）
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <com.zhangteng.zxing.ViewfinderView
+            android:id="@+id/viewfinderView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+代码示例 （二维码/条形码）
+
+    //跳转的默认扫码界面
+    startActivityForResult(new Intent(context,CaptureActivity.class),requestCode);
+
+    //生成二维码
+    CodeUtils.createQRCode(content,600,logo);
+    //生成条形码
+    CodeUtils.createBarCode(content, BarcodeFormat.CODE_128,800,200);
+如果直接使用CaptureActivity需在您项目的AndroidManifest中添加如下配置
+
+    <activity
+        android:name="com.zhangteng.zxing.CaptureActivity"
+        android:screenOrientation="portrait"/>
+快速实现扫码有以下几种方式：
+1、直接使用CaptureActivity或者CaptureFragment。(纯洁的扫码，无任何添加剂)
+
+2、通过继承CaptureActivity或者CaptureFragment并自定义布局。（适用于大多场景，并无需关心扫码相关逻辑）
+
+3、在你项目的Activity或者Fragment中创建创建一个CaptureHelper并在相应的生命周期中调用CaptureHelper的周期。（适用于想在扫码界面写交互逻辑，又因为项目架构或其它原因，无法直接或间接继承CaptureActivity或CaptureFragment时使用）
+
+4、参照CaptureHelper写一个自定义的扫码帮助类，其它步骤同方式3。（扩展高级用法，谨慎使用）
