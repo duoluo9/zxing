@@ -49,6 +49,11 @@ public class MainActivity extends CaptureActivity {
         if (!hasTorch()) {
             ivFlash.setVisibility(View.GONE);
         }
+        //获取CaptureHelper，里面有扫码相关的配置设置
+        getCaptureHelper().playBeep(false)//播放音效
+                .vibrate(true)//震动
+                .decodeFormats(DecodeFormatManager.QR_CODE_FORMATS)//设置只识别二维码会提升速度
+                .continuousScan(true);//是否连扫
     }
 
     /**

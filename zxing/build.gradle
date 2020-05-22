@@ -28,7 +28,7 @@ dependencies {
     implementation 'junit:junit:4.12'
     implementation 'com.android.support.test:runner:1.0.2'
     implementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.google.zxing:core:3.3.3'
+    api 'com.google.zxing:core:3.3.3'
 }
 //上传命令：1、gradew javadocJar 2、gradew sourcesJar 3、gradlew install 4、gradlew bintrayUpload
 def siteUrl = 'https://github.com/duoluo9/Zxing' //项目在github主页地址
@@ -40,7 +40,7 @@ def artifactName = 'Zxing'//项目名
 def description = '二维码扫描库'//添加项目描述
 
 group = "com.zhangteng.zxing"//发布aar前缀根节点
-version = "1.0.0"//发布aar的库版本
+version = "1.0.1"//发布aar的库版本
 
 install {
     repositories.mavenInstaller {
