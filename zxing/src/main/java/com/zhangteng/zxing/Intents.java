@@ -17,7 +17,7 @@ package com.zhangteng.zxing;
 
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * This class provides the constants to use when sending an Intent to Barcode Scanner.
